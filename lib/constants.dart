@@ -8,4 +8,5 @@ class Constants {
   static const dividerColor = Color.fromRGBO(227, 227, 227, 1);
   static const progressIndicatorBackgroundColor =
       Color.fromRGBO(231, 231, 231, 1);
+  static const backArrorColor = Color.fromRGBO(255, 187, 63, 1);
 }

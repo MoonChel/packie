@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:packie/components/all.dart';
-import 'package:packie/constants.dart';
+import 'package:packie/components/_all.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/';

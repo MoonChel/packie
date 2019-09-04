@@ -1,7 +1,4 @@
-import './HomePage.dart';
-import './ChecklistDetailsPage.dart';
-import './PackingTipsPage.dart';
-import './SettingsPage.dart';
+import './_all.dart';
 
 final routes = {
   HomePage.routeName: (c) => HomePage(),

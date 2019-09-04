@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:packie/constants.dart';
 
-import './all.dart';
+import './_all.dart';
 
 class CheckLists extends StatelessWidget {
   const CheckLists({
