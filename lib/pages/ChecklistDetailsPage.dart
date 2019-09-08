@@ -14,35 +14,41 @@ class ChecklistDetailsPage extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      body: Stack(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MyAppBar(),
-          Positioned(
-            right: 0,
-            child: CornerButton(
-              onPressed: () {
-                showCreateNewListModal(context);
-              },
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  left: su.setHeight(30),
+                  top: su.setHeight(100),
+                ),
+                child: MyAppBar(),
+              ),
+              CornerButton(
+                onPressed: () {
+                  showCreateNewListModal(context);
+                },
+              ),
+            ],
           ),
-          SafeArea(
+          Expanded(
             child: MyPadding(
               child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: su.setHeight(100)),
                   Text("Bahamas Packing List", style: textTheme.headline),
-                  SizedBox(height: su.setHeight(50)),
                   buildCategoriesView(),
-                  SizedBox(height: su.setHeight(50)),
                   Expanded(child: buildCheckListItems()),
-                  SizedBox(height: su.setHeight(50)),
+                  SizedBox(height: su.setHeight(60)),
                   SizedBox(
                     width: double.infinity,
                     child: buildClearButton(textTheme),
-                  )
+                  ),
+                  SizedBox(height: su.setHeight(80))
                 ],
               ),
             ),
@@ -54,6 +60,7 @@ class ChecklistDetailsPage extends StatelessWidget {
 
   ListView buildCheckListItems() {
     return ListView.builder(
+      padding: EdgeInsets.zero,
       itemCount: 10,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
@@ -88,9 +95,10 @@ class ChecklistDetailsPage extends StatelessWidget {
   RaisedButton buildClearButton(TextTheme textTheme) {
     return RaisedButton(
       color: Constants.orange,
+      padding: EdgeInsets.symmetric(vertical: 10),
       child: Text(
         "Clear",
-        style: textTheme.button.copyWith(color: Colors.white),
+        style: textTheme.title.copyWith(color: Colors.white),
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -99,14 +107,19 @@ class ChecklistDetailsPage extends StatelessWidget {
     );
   }
 
-  GridView buildCategoriesView() {
+  Widget buildCategoriesView() {
     final su = ScreenUtil.getInstance();
     final iconSize = su.setWidth(100);
 
     return GridView.count(
+      padding: EdgeInsets.only(
+        top: su.setHeight(50),
+        bottom: su.setHeight(30),
+      ),
       crossAxisCount: 4,
-      crossAxisSpacing: 10,
+      crossAxisSpacing: 15,
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         CategoryIcon(size: iconSize),
         CategoryIcon(size: iconSize),

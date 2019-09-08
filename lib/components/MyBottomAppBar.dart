@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:packie/constants.dart';
+import 'package:packie/pages/_all.dart';
 
 class MyBottomAppBar extends StatelessWidget {
   const MyBottomAppBar({
@@ -17,6 +18,13 @@ class MyBottomAppBar extends StatelessWidget {
       iconSize: 35,
       unselectedItemColor: Constants.fontColor,
       selectedItemColor: Constants.orange,
+      onTap: (int index) {
+        if (index == 1) {
+          Navigator.pushNamed(context, PackingTipsPage.routeName);
+        } else if (index == 2) {
+          Navigator.pushNamed(context, SettingsPage.routeName);
+        }
+      },
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

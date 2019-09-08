@@ -71,74 +71,80 @@ class HomePage extends StatelessWidget {
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(borderRadius: radius),
       context: context,
+      isScrollControlled: true,
       builder: (context) => ClipRRect(
         borderRadius: radius,
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              right: 0,
-              child: CloseBottomSheetButton(),
-            ),
-            Padding(
-              padding: EdgeInsets.all(su.setWidth(100)),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        "Create Packing List",
-                        style: textTheme.headline,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: su.setHeight(50)),
-                  Flexible(
-                    child: TextField(
-                      maxLines: 1,
-                      maxLength: 50,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        border: null,
-                        hintText: "List Name",
-                        focusedBorder: null,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: su.setHeight(50)),
-                  GridView.count(
-                    physics: NeverScrollableScrollPhysics(),
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 10,
-                    shrinkWrap: true,
-                    children: <Widget>[
-                      CategoryIcon(size: iconSize),
-                      CategoryIcon(size: iconSize),
-                      CategoryIcon(size: iconSize),
-                      CategoryIcon(size: iconSize),
-                    ],
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: RaisedButton(
-                      padding: EdgeInsets.symmetric(
-                        vertical: su.setHeight(40),
-                      ),
-                      color: Constants.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Text(
-                        "Create List",
-                        style: textTheme.title.copyWith(color: Colors.white),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
+        child: Container(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                right: 0,
+                child: CloseBottomSheetButton(),
               ),
-            ),
-          ],
+              Padding(
+                padding: EdgeInsets.all(su.setWidth(100)),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          "Create Packing List",
+                          style: textTheme.headline,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: su.setHeight(50)),
+                    Flexible(
+                      child: TextField(
+                        maxLines: 1,
+                        maxLength: 50,
+                        // autofocus: true,
+                        decoration: InputDecoration(
+                          border: null,
+                          hintText: "List Name",
+                          focusedBorder: null,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: su.setHeight(50)),
+                    GridView.count(
+                      physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 10,
+                      shrinkWrap: true,
+                      children: <Widget>[
+                        CategoryIcon(size: iconSize),
+                        CategoryIcon(size: iconSize),
+                        CategoryIcon(size: iconSize),
+                        CategoryIcon(size: iconSize),
+                      ],
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: RaisedButton(
+                        padding: EdgeInsets.symmetric(
+                          vertical: su.setHeight(40),
+                        ),
+                        color: Constants.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Text(
+                          "Create List",
+                          style: textTheme.title.copyWith(color: Colors.white),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

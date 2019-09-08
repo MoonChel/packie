@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:packie/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import './_all.dart';
 
 class CheckLists extends StatelessWidget {
-  const CheckLists({
+  CheckLists({
     Key key,
   }) : super(key: key);
+
+  final su = ScreenUtil.getInstance();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,10 @@ class CheckLists extends StatelessWidget {
       itemCount: 8,
       separatorBuilder: (BuildContext context, int index) {
         return Padding(
-          padding: const EdgeInsets.only(top: 25, bottom: 15),
+          padding: EdgeInsets.only(
+            top: su.setHeight(120),
+            bottom: su.setHeight(120),
+          ),
           child: Container(
             height: 0.5,
             color: Constants.dividerColor,

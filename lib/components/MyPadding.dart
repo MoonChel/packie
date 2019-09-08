@@ -14,7 +14,7 @@ class MyPadding extends StatelessWidget {
       padding: EdgeInsets.only(
         left: su.setWidth(Constants.bodyPadding),
         right: su.setWidth(Constants.bodyPadding),
-        top: su.setWidth(Constants.bodyPadding),
+        top: su.setWidth(Constants.bodyPadding) / 2,
       ),
       child: child,
     );
