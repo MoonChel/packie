@@ -27,14 +27,11 @@ class HomePage extends StatelessWidget {
                   top: su.setHeight(150),
                   left: su.setWidth(Constants.bodyPadding),
                 ),
-                child: Icon(
-                  Icons.supervised_user_circle,
-                  size: 50,
-                ),
+                child: Image.asset('assets/Avatar.png'),
               ),
               CornerButton(
                 onPressed: () {
-                  showCreateNewListModal(context);
+                  showCreateCheckListModal(context);
                 },
               ),
             ],
@@ -81,95 +78,48 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Future showCreateNewListModal(BuildContext context) {
+  Future showCreateCheckListModal(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-
     final su = ScreenUtil.getInstance();
 
-    final radius = BorderRadius.only(
-      topLeft: Radius.circular(su.setWidth(100)),
-      topRight: Radius.circular(su.setWidth(100)),
-    );
-
-    final iconSize = 80.0;
-
-    return showModalBottomSheet(
-      shape: RoundedRectangleBorder(borderRadius: radius),
+    return showMyBottomSheetModal(
       context: context,
-      isScrollControlled: true,
-      builder: (context) => ClipRRect(
-        borderRadius: radius,
-        child: Container(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                right: 0,
-                child: CloseBottomSheetButton(),
-              ),
-              Padding(
-                padding: EdgeInsets.all(su.setWidth(100)),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          "Create Packing List",
-                          style: textTheme.headline,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: su.setHeight(50)),
-                    Flexible(
-                      child: TextField(
-                        maxLines: 1,
-                        maxLength: 50,
-                        autofocus: true,
-                        decoration: InputDecoration(
-                          hintText: "List Name",
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: su.setHeight(50)),
-                    GridView.count(
-                      physics: NeverScrollableScrollPhysics(),
-                      crossAxisCount: 4,
-                      crossAxisSpacing: 10,
-                      shrinkWrap: true,
-                      children: <Widget>[
-                        CategoryIcon(iconImage: 'assets/Group 12.png'),
-                        CategoryIcon(iconImage: 'assets/clothes.png'),
-                        CategoryIcon(iconImage: 'assets/camera.png'),
-                        CategoryIcon(iconImage: 'assets/headphones.png'),
-                      ],
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: RaisedButton(
-                        padding: EdgeInsets.symmetric(
-                          vertical: su.setHeight(40),
-                        ),
-                        color: Constants.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Text(
-                          "Create List",
-                          style: textTheme.title.copyWith(color: Colors.white),
-                        ),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+      children: <Widget>[
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text("Create Packing List", style: textTheme.headline),
+        ),
+        SizedBox(height: su.setHeight(50)),
+        Flexible(
+          child: TextField(
+            maxLines: 1,
+            maxLength: 50,
+            autofocus: true,
+            decoration: InputDecoration(
+              hintText: "List Name",
+            ),
           ),
         ),
-      ),
+        SizedBox(height: su.setHeight(50)),
+        GridView.count(
+          physics: NeverScrollableScrollPhysics(),
+          crossAxisCount: 4,
+          crossAxisSpacing: 10,
+          shrinkWrap: true,
+          children: <Widget>[
+            CategoryIcon(iconImage: 'assets/Group 12.png'),
+            CategoryIcon(iconImage: 'assets/clothes.png'),
+            CategoryIcon(iconImage: 'assets/camera.png'),
+            CategoryIcon(iconImage: 'assets/headphones.png'),
+          ],
+        ),
+        SizedBox(height: su.setHeight(40)),
+        MyRaisedButton(
+          color: Constants.blue,
+          text: "Create List",
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }

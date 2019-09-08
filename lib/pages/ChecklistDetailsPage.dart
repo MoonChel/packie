@@ -30,7 +30,11 @@ class ChecklistDetailsPage extends StatelessWidget {
             ],
           ),
           Expanded(
-            child: MyPadding(
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: su.setWidth(Constants.bodyPadding),
+                right: su.setWidth(Constants.bodyPadding),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -38,9 +42,10 @@ class ChecklistDetailsPage extends StatelessWidget {
                   buildCategoriesView(),
                   Expanded(child: buildCheckListItems()),
                   SizedBox(height: su.setHeight(60)),
-                  SizedBox(
-                    width: double.infinity,
-                    child: buildClearButton(textTheme),
+                  MyRaisedButton(
+                    color: Constants.orange,
+                    text: "Clear",
+                    onPressed: () {},
                   ),
                   SizedBox(height: su.setHeight(80))
                 ],
@@ -86,21 +91,6 @@ class ChecklistDetailsPage extends StatelessWidget {
     );
   }
 
-  RaisedButton buildClearButton(TextTheme textTheme) {
-    return RaisedButton(
-      color: Constants.orange,
-      padding: EdgeInsets.symmetric(vertical: 10),
-      child: Text(
-        "Clear",
-        style: textTheme.title.copyWith(color: Colors.white),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      onPressed: () {},
-    );
-  }
-
   Widget buildCategoriesView() {
     final su = ScreenUtil.getInstance();
 
@@ -123,4 +113,29 @@ class ChecklistDetailsPage extends StatelessWidget {
   }
 }
 
-void showCreateNewListModal(BuildContext context) {}
+Future showCreateNewListModal(BuildContext context) {
+  final textTheme = Theme.of(context).textTheme;
+  final su = ScreenUtil.getInstance();
+
+  return showMyBottomSheetModal(context: context, children: [
+    Align(
+      alignment: Alignment.centerLeft,
+      child: Text("Add New Item", style: textTheme.headline),
+    ),
+    SizedBox(height: su.setHeight(50)),
+    Flexible(
+      child: TextField(
+        maxLines: 1,
+        maxLength: 50,
+        autofocus: true,
+        decoration: InputDecoration(
+          hintText: "List Name",
+        ),
+      ),
+    ),
+    MyRaisedButton(
+      text: "Add Item",
+      onPressed: () {},
+    ),
+  ]);
+}

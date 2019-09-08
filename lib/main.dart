@@ -11,6 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterStatusbarcolor.setStatusBarColor(Constants.blue);
 
+    final textTheme = Theme.of(context).textTheme;
+
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
@@ -19,6 +21,21 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         bottomSheetTheme: BottomSheetThemeData(
           backgroundColor: Colors.white,
+        ),
+        buttonTheme: ButtonThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 15),
+          buttonColor: Constants.blue,
+          textTheme: ButtonTextTheme.primary,
+        ),
+        textTheme: textTheme.copyWith(
+          button: textTheme.button.copyWith(
+            fontSize: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,

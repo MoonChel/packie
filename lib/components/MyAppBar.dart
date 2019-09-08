@@ -15,7 +15,7 @@ class MyAppBar extends StatelessWidget {
     return IconButton(
       padding: EdgeInsets.only(
         top: su.setHeight(100),
-        left: su.setHeight(Constants.bodyPadding),
+        left: su.setHeight(Constants.bodyPadding) - 5,
       ),
       icon: Icon(Icons.arrow_back_ios),
       color: Constants.backArrorColor,

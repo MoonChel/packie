@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CategoryIcon extends StatelessWidget {
   CategoryIcon({
     Key key,
-    this.size = 90,
+    this.size = 100,
     this.iconImage,
   }) : super(key: key);
 
