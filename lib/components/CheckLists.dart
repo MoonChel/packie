@@ -14,12 +14,15 @@ class CheckLists extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      padding: EdgeInsets.zero,
       itemCount: 8,
       separatorBuilder: (BuildContext context, int index) {
         return Padding(
           padding: EdgeInsets.only(
             top: su.setHeight(120),
-            bottom: su.setHeight(120),
+            bottom: su.setHeight(80),
+            left: su.setHeight(50),
+            right: su.setHeight(50),
           ),
           child: Container(
             height: 0.5,
@@ -28,7 +31,12 @@ class CheckLists extends StatelessWidget {
         );
       },
       itemBuilder: (BuildContext context, int index) {
-        return CheckListItem();
+        return Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: su.setHeight(Constants.bodyPadding),
+          ),
+          child: CheckListItem(),
+        );
       },
     );
   }

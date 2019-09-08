@@ -28,15 +28,15 @@ class MyBottomAppBar extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          title: Text("test"),
+          title: Text("home"),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.lightbulb_outline),
-          title: Text("test"),
+          title: Text("packing tips"),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
-          title: Text("test"),
+          title: Text("settings"),
         ),
       ],
     );

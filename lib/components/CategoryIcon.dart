@@ -6,9 +6,11 @@ class CategoryIcon extends StatelessWidget {
   CategoryIcon({
     Key key,
     this.size,
+    this.iconImage,
   }) : super(key: key);
 
   final su = ScreenUtil.getInstance();
+  final String iconImage;
   final double size;
 
   @override
@@ -16,10 +18,7 @@ class CategoryIcon extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Container(
-          child: Icon(
-            Icons.phone_android,
-            size: size ?? su.setWidth(60),
-          ),
+          child: Image.asset(iconImage),
           padding: EdgeInsets.all(su.setWidth(20)),
           decoration: BoxDecoration(
             color: Constants.backgroundColor,

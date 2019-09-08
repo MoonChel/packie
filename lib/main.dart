@@ -15,7 +15,20 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
         primarySwatch: Colors.blue,
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: Colors.white,
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: Constants.backgroundColor,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 0, color: Colors.white),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        ),
       ),
       routes: routes,
     );

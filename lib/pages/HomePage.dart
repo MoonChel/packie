@@ -16,40 +16,65 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Positioned(
-            right: 0,
-            child: CornerButton(
-              onPressed: () {
-                showCreateNewListModal(context);
-              },
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  top: su.setHeight(150),
+                  left: su.setWidth(Constants.bodyPadding),
+                ),
+                child: Icon(
+                  Icons.supervised_user_circle,
+                  size: 50,
+                ),
+              ),
+              CornerButton(
+                onPressed: () {
+                  showCreateNewListModal(context);
+                },
+              ),
+            ],
           ),
-          SafeArea(
-            child: MyPadding(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Icon(Icons.supervised_user_circle, size: 50),
-                  SizedBox(height: 20),
-                  Text(
-                    "Hello, Let's start packing!",
+          Padding(
+            padding: EdgeInsets.only(
+              top: su.setHeight(50),
+              left: su.setHeight(Constants.bodyPadding),
+            ),
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: "Hello, ",
+                    style: textTheme.headline.copyWith(color: Constants.orange),
+                  ),
+                  TextSpan(
+                    text: "Let's start packing!",
                     style: textTheme.headline,
                   ),
-                  Text(
-                    "It takes only a few minutes...",
+                  TextSpan(text: "\n"),
+                  TextSpan(
+                    text: "It takes only a few minutes...",
                     style: textTheme.title,
-                  ),
-                  SizedBox(height: 50),
-                  Expanded(
-                    child: CheckLists(),
                   ),
                 ],
               ),
             ),
           ),
+          SizedBox(height: su.setHeight(200)),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(child: CheckLists()),
+              ],
+            ),
+          ),
+          SizedBox(height: su.setHeight(100)),
         ],
       ),
       bottomNavigationBar: MyBottomAppBar(),
@@ -66,7 +91,7 @@ class HomePage extends StatelessWidget {
       topRight: Radius.circular(su.setWidth(100)),
     );
 
-    final iconSize = su.setWidth(100);
+    final iconSize = su.setWidth(80);
 
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(borderRadius: radius),
@@ -102,11 +127,9 @@ class HomePage extends StatelessWidget {
                       child: TextField(
                         maxLines: 1,
                         maxLength: 50,
-                        // autofocus: true,
+                        autofocus: true,
                         decoration: InputDecoration(
-                          border: null,
                           hintText: "List Name",
-                          focusedBorder: null,
                         ),
                       ),
                     ),
@@ -117,10 +140,22 @@ class HomePage extends StatelessWidget {
                       crossAxisSpacing: 10,
                       shrinkWrap: true,
                       children: <Widget>[
-                        CategoryIcon(size: iconSize),
-                        CategoryIcon(size: iconSize),
-                        CategoryIcon(size: iconSize),
-                        CategoryIcon(size: iconSize),
+                        CategoryIcon(
+                          iconImage: 'assets/Group 12.png',
+                          size: iconSize,
+                        ),
+                        CategoryIcon(
+                          iconImage: 'assets/clothes.png',
+                          size: iconSize,
+                        ),
+                        CategoryIcon(
+                          iconImage: 'assets/camera.png',
+                          size: iconSize,
+                        ),
+                        CategoryIcon(
+                          iconImage: 'assets/headphones.png',
+                          size: iconSize,
+                        ),
                       ],
                     ),
                     SizedBox(
