@@ -113,7 +113,7 @@ class HomePage extends StatelessWidget {
             CategoryIcon(iconImage: 'assets/headphones.png'),
           ],
         ),
-        SizedBox(height: su.setHeight(40)),
+        SizedBox(height: su.setHeight(30)),
         MyRaisedButton(
           color: Constants.blue,
           text: "Create List",

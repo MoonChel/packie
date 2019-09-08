@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
           ),
-          padding: EdgeInsets.symmetric(vertical: 15),
+          padding: EdgeInsets.symmetric(vertical: 12),
           buttonColor: Constants.blue,
           textTheme: ButtonTextTheme.primary,
         ),

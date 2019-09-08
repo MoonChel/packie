@@ -133,6 +133,7 @@ Future showCreateNewListModal(BuildContext context) {
         ),
       ),
     ),
+    SizedBox(height: su.setHeight(30)),
     MyRaisedButton(
       text: "Add Item",
       onPressed: () {},
