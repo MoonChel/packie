@@ -103,7 +103,6 @@ class ChecklistDetailsPage extends StatelessWidget {
 
   Widget buildCategoriesView() {
     final su = ScreenUtil.getInstance();
-    final iconSize = su.setWidth(80);
 
     return GridView.count(
       padding: EdgeInsets.only(
@@ -115,22 +114,10 @@ class ChecklistDetailsPage extends StatelessWidget {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
-        CategoryIcon(
-          iconImage: 'assets/Group 12.png',
-          size: iconSize,
-        ),
-        CategoryIcon(
-          iconImage: 'assets/clothes.png',
-          size: iconSize,
-        ),
-        CategoryIcon(
-          iconImage: 'assets/camera.png',
-          size: iconSize,
-        ),
-        CategoryIcon(
-          iconImage: 'assets/headphones.png',
-          size: iconSize,
-        ),
+        CategoryIcon(iconImage: 'assets/Group 12.png'),
+        CategoryIcon(iconImage: 'assets/clothes.png'),
+        CategoryIcon(iconImage: 'assets/camera.png'),
+        CategoryIcon(iconImage: 'assets/headphones.png'),
       ],
     );
   }

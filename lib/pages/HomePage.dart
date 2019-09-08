@@ -91,7 +91,7 @@ class HomePage extends StatelessWidget {
       topRight: Radius.circular(su.setWidth(100)),
     );
 
-    final iconSize = su.setWidth(80);
+    final iconSize = 80.0;
 
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(borderRadius: radius),
@@ -140,22 +140,10 @@ class HomePage extends StatelessWidget {
                       crossAxisSpacing: 10,
                       shrinkWrap: true,
                       children: <Widget>[
-                        CategoryIcon(
-                          iconImage: 'assets/Group 12.png',
-                          size: iconSize,
-                        ),
-                        CategoryIcon(
-                          iconImage: 'assets/clothes.png',
-                          size: iconSize,
-                        ),
-                        CategoryIcon(
-                          iconImage: 'assets/camera.png',
-                          size: iconSize,
-                        ),
-                        CategoryIcon(
-                          iconImage: 'assets/headphones.png',
-                          size: iconSize,
-                        ),
+                        CategoryIcon(iconImage: 'assets/Group 12.png'),
+                        CategoryIcon(iconImage: 'assets/clothes.png'),
+                        CategoryIcon(iconImage: 'assets/camera.png'),
+                        CategoryIcon(iconImage: 'assets/headphones.png'),
                       ],
                     ),
                     SizedBox(
