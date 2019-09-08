@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
                   top: su.setHeight(150),
                   left: su.setWidth(Constants.bodyPadding),
                 ),
-                child: Image.asset('assets/Avatar.png'),
+                child: Image.asset('assets/images/Avatar.png'),
               ),
               CornerButton(
                 onPressed: () {
@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              top: su.setHeight(50),
+              top: su.setHeight(40),
               left: su.setHeight(Constants.bodyPadding),
             ),
             child: RichText(
@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: su.setHeight(200)),
+          SizedBox(height: su.setHeight(150)),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -107,10 +107,10 @@ class HomePage extends StatelessWidget {
           crossAxisSpacing: 10,
           shrinkWrap: true,
           children: <Widget>[
-            CategoryIcon(iconImage: 'assets/Group 12.png'),
-            CategoryIcon(iconImage: 'assets/clothes.png'),
-            CategoryIcon(iconImage: 'assets/camera.png'),
-            CategoryIcon(iconImage: 'assets/headphones.png'),
+            CategoryIcon(iconImage: 'assets/images/Group 12.png'),
+            CategoryIcon(iconImage: 'assets/images/clothes.png'),
+            CategoryIcon(iconImage: 'assets/images/camera.png'),
+            CategoryIcon(iconImage: 'assets/images/headphones.png'),
           ],
         ),
         SizedBox(height: su.setHeight(30)),

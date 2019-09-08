@@ -30,10 +30,19 @@ class MyApp extends StatelessWidget {
           buttonColor: Constants.blue,
           textTheme: ButtonTextTheme.primary,
         ),
+        fontFamily: 'Nunito_Sans',
         textTheme: textTheme.copyWith(
           button: textTheme.button.copyWith(
             fontSize: 20,
             color: Colors.white,
+            fontWeight: FontWeight.w700,
+          ),
+          headline: textTheme.headline.copyWith(
+            color: Constants.fontColor,
+            fontWeight: FontWeight.w800,
+          ),
+          title: textTheme.title.copyWith(
+            color: Constants.fontColor,
             fontWeight: FontWeight.w700,
           ),
         ),

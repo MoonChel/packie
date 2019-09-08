@@ -104,10 +104,10 @@ class ChecklistDetailsPage extends StatelessWidget {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
-        CategoryIcon(iconImage: 'assets/Group 12.png'),
-        CategoryIcon(iconImage: 'assets/clothes.png'),
-        CategoryIcon(iconImage: 'assets/camera.png'),
-        CategoryIcon(iconImage: 'assets/headphones.png'),
+        CategoryIcon(iconImage: 'assets/images/Group 12.png'),
+        CategoryIcon(iconImage: 'assets/images/clothes.png'),
+        CategoryIcon(iconImage: 'assets/images/camera.png'),
+        CategoryIcon(iconImage: 'assets/images/headphones.png'),
       ],
     );
   }

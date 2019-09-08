@@ -38,7 +38,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - assets/
+    - assets/images/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -70,3 +70,20 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Nunito_Sans
+      fonts:
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-Black.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-BlackItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-Bold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-BoldItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-ExtraBold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-ExtraLight.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-ExtraLightItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-Light.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-LightItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-Regular.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-RegularItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-SemiBold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans-SemiBoldItalic.ttf

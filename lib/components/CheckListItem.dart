@@ -20,19 +20,21 @@ class CheckListItem extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Row(
+            textBaseline: TextBaseline.alphabetic,
+            crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text("Bahamas Packing List", style: textTheme.title),
               Row(
                 children: <Widget>[
-                  CategoryIcon(iconImage: 'assets/clothes.png'),
+                  CategoryIcon(iconImage: 'assets/images/clothes.png'),
                   SizedBox(width: 5),
-                  CategoryIcon(iconImage: 'assets/clothes.png'),
+                  CategoryIcon(iconImage: 'assets/images/clothes.png'),
                 ],
               )
             ],
           ),
-          SizedBox(height: su.setHeight(60)),
+          SizedBox(height: su.setHeight(40)),
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: LinearProgressIndicator(
