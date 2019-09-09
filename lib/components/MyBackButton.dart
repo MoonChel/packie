@@ -23,7 +23,7 @@ class MyBackButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
         top: su.setHeight(this.topPadding),
-        left: su.setHeight(Constants.bodyPadding - 15),
+        left: su.setWidth(Constants.bodyPadding - 10),
       ),
       child: GestureDetector(
         onTap: () {

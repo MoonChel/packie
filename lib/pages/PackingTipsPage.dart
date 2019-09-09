@@ -6,7 +6,6 @@ import 'package:packie/components/_all.dart';
 
 import 'package:packie/constants.dart';
 import 'package:packie/models.dart';
-import 'package:packie/pages/_all.dart';
 
 import 'package:packie/dummy_data.dart';
 
@@ -96,7 +95,7 @@ class PackingTipsPage extends StatelessWidget {
               : SizedBox(height: su.setHeight(100)),
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: su.setHeight(Constants.bodyPadding),
+              horizontal: su.setWidth(Constants.bodyPadding),
             ),
             child: RichText(
               text: TextSpan(
@@ -111,6 +110,7 @@ class PackingTipsPage extends StatelessWidget {
               ),
             ),
           ),
+          if (index == tips.length - 1) SizedBox(height: su.setHeight(100))
         ],
       ),
     );
