@@ -17,18 +17,7 @@ class CheckLists extends StatelessWidget {
       padding: EdgeInsets.zero,
       itemCount: 8,
       separatorBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: EdgeInsets.only(
-            top: su.setHeight(120),
-            bottom: su.setHeight(80),
-            left: su.setHeight(50),
-            right: su.setHeight(50),
-          ),
-          child: Container(
-            height: 0.5,
-            color: Constants.dividerColor,
-          ),
-        );
+        return MyDivider();
       },
       itemBuilder: (BuildContext context, int index) {
         return Padding(

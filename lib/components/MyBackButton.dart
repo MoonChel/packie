@@ -8,10 +8,12 @@ class MyBackButton extends StatelessWidget {
   MyBackButton({
     Key key,
     this.topPadding = Constants.bodyPadding,
+    this.color = Constants.orange,
   }) : super(key: key);
 
   final su = ScreenUtil.getInstance();
   final double topPadding;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class MyBackButton extends StatelessWidget {
         child: Icon(
           icon,
           size: su.setHeight(80),
-          color: Constants.orange,
+          color: color,
         ),
       ),
     );
