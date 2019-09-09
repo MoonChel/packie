@@ -14,45 +14,50 @@ class ChecklistDetailsPage extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              MyAppBar(),
-              CornerButton(
-                onPressed: () {
-                  showCreateNewListModal(context);
-                },
-              ),
-            ],
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: su.setWidth(Constants.bodyPadding),
-                right: su.setWidth(Constants.bodyPadding),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text("Bahamas Packing List", style: textTheme.headline),
-                  buildCategoriesView(),
-                  Expanded(child: buildCheckListItems()),
-                  SizedBox(height: su.setHeight(60)),
-                  MyRaisedButton(
-                    color: Constants.orange,
-                    text: "Clear",
-                    onPressed: () {},
-                  ),
-                  SizedBox(height: su.setHeight(80))
-                ],
-              ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(su.setHeight(240)),
+        child: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          leading: null,
+          flexibleSpace: FlexibleSpaceBar(
+            titlePadding: EdgeInsets.zero,
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                MyBackButton(),
+                CornerButton(
+                  onPressed: () {
+                    showCreateNewListModal(context);
+                  },
+                ),
+              ],
             ),
           ),
-        ],
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: su.setWidth(Constants.bodyPadding),
+          right: su.setWidth(Constants.bodyPadding),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text("Bahamas Packing List", style: textTheme.headline),
+            buildCategoriesView(),
+            Expanded(child: buildCheckListItems()),
+            SizedBox(height: su.setHeight(60)),
+            MyRaisedButton(
+              color: Constants.orange,
+              text: "Clear",
+              onPressed: () {},
+            ),
+            SizedBox(height: su.setHeight(80)),
+          ],
+        ),
       ),
     );
   }

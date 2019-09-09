@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:packie/components/_all.dart';
+
 import 'package:packie/constants.dart';
 import 'package:packie/pages/_all.dart';
 
@@ -19,29 +21,51 @@ class PackingTipsPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            automaticallyImplyLeading: true,
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.settings),
-                tooltip: 'Open settings',
-                onPressed: () {
-                  Navigator.pushNamed(context, SettingsPage.routeName);
-                },
-              ),
-            ],
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: false,
-              title: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(text: "Packing Tips", style: textTheme.headline),
-                    TextSpan(text: "\n"),
-                    TextSpan(
-                      text: "The ultimate guide to Smart Packing",
-                      style: textTheme.subtitle,
-                    ),
-                  ],
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                MyBackButton(topPadding: 0.0),
+                Padding(
+                  padding: EdgeInsets.only(right: su.setHeight(15)),
+                  child: FlatButton(
+                    child: Image.asset('assets/images/settings_white.png'),
+                    onPressed: () {
+                      Navigator.pushNamed(context, SettingsPage.routeName);
+                    },
+                  ),
                 ),
+              ],
+            ),
+            titleSpacing: 0,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.asset(
+                'assets/images/clothes-luggage.jpg',
+                fit: BoxFit.fill,
+              ),
+              centerTitle: false,
+              title: Row(
+                children: <Widget>[
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Packing Tips",
+                          style: textTheme.headline.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextSpan(text: "\n"),
+                        TextSpan(
+                          text: "The ultimate guide to Smart Packing",
+                          style: textTheme.body1.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               titlePadding: EdgeInsets.only(
                 left: su.setWidth(Constants.bodyPadding),
@@ -50,7 +74,7 @@ class PackingTipsPage extends StatelessWidget {
             ),
             expandedHeight: expHeight,
             bottom: PreferredSize(
-              preferredSize: Size(0, su.setHeight(200.0)),
+              preferredSize: Size(0, su.setHeight(250.0)),
               child: Container(),
             ),
             pinned: true,

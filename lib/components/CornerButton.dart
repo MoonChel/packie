@@ -17,7 +17,7 @@ class CornerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = su.setHeight(320);
-    double width = su.setWidth(200);
+    double width = su.setWidth(240);
     double iconSize = su.setSp(120);
 
     return GestureDetector(

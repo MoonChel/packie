@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:packie/constants.dart';
-import 'package:packie/pages/_routes.dart';
+
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+
+import 'package:packie/constants.dart';
+import 'package:packie/pages/_all.dart';
+import 'package:packie/pages/_routes.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    FlutterStatusbarcolor.setStatusBarColor(Constants.blue);
-
     final textTheme = Theme.of(context).textTheme;
+    FlutterStatusbarcolor.setStatusBarColor(
+      Constants.blue,
+      animate: true,
+    );
 
     return MaterialApp(
       title: 'Flutter Demo',
@@ -56,7 +60,30 @@ class MyApp extends StatelessWidget {
           contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         ),
       ),
-      routes: routes,
+      // routes: routes,
+      onGenerateRoute: (RouteSettings settings) {
+        switch (settings.name) {
+          case HomePage.routeName:
+          case ChecklistDetailsPage.routeName:
+          case SettingsPage.routeName:
+            FlutterStatusbarcolor.setStatusBarColor(
+              Constants.blue,
+              animate: true,
+            );
+            break;
+          case PackingTipsPage.routeName:
+            FlutterStatusbarcolor.setStatusBarColor(
+              Colors.transparent,
+              animate: true,
+            );
+            break;
+        }
+
+        return MaterialPageRoute(
+          settings: settings,
+          builder: routes[settings.name],
+        );
+      },
     );
   }
 }
