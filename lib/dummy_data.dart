@@ -32,3 +32,111 @@ const tips = [
         "It’s important to keep your clothes smelling fresh, especially if you’re on a long trip. By taking a small bag of potpourri, fabric conditioner sheets, or scented drawer liners, you’ll keep your clothes smelling sweet throughout the trip.",
   ),
 ];
+
+var clothesCategory = CheckListCategory(
+  name: "CLOTHES_ACCESSORIES",
+  iconPath: 'assets/images/clothes.png',
+);
+
+var clothes = [
+  "Underwear",
+  "Socks / Stockings",
+  "Undershirts / bras",
+  "Sleepwear",
+  "T-shirts",
+  "Dress / Casual shirts",
+  "Jeans / Pants",
+  "Dresses / Shorts / Skirts",
+  "Sweaters / sweatshirts",
+  "Formal wear (where appropriate)",
+  "Swimsuits / cover-ups",
+  "Coats / jackets / rainwear",
+].map((name) => CheckListItem(name: name, category: clothesCategory)).toList();
+
+var toiletriesCategory = CheckListCategory(
+  name: "TOILETRIES",
+  iconPath: 'assets/images/Group 12.png',
+);
+
+var toiletries = [
+  "Face cleanser",
+  "Hairstyling tools",
+  "Brush / comb",
+  "Shampoo / conditioner",
+  "Deodorant",
+  "Soap",
+  "Dental floss",
+  "Toothpaste / Toothbrush",
+  "Birth control",
+  "Feminine-hygiene products",
+  "Makeup + Makeup remover",
+  "Shaving supplies",
+  "Contact lenses / solution",
+  "Moisturizer",
+  "Sunscreen",
+  "Face lotion/gel/etc.",
+]
+    .map((name) => CheckListItem(name: name, category: toiletriesCategory))
+    .toList();
+
+var miscCategory = CheckListCategory(
+  name: "MISC",
+  iconPath: 'assets/images/camera.png',
+);
+
+var misc = [
+  "Cell phone",
+  "Electronic chargers",
+  "Laptop / tablet",
+  "Plug adaptor",
+  "Binoculars",
+  "Emergency contacts",
+  "Credit-card / bank contacts",
+  "Copies of passport / creditcard / etc.",
+].map((name) => CheckListItem(name: name, category: miscCategory)).toList();
+
+var carryOnCategory = CheckListCategory(
+  name: "CARRY_ON",
+  iconPath: 'assets/images/headphones.png',
+);
+
+var carryOn = [
+  "Lip balm",
+  "Ear plugs / eye mask",
+  "Pashmina / travel blanket",
+  "Video / music player",
+  "Earbuds / headphones",
+  "Books or e-books",
+  "Valuables, such as jewelry",
+  "Passport / visa / ID",
+  "Empty water bottle (fill post-security)",
+  "Camera w / memory card",
+  "Paper / pen",
+  "Maps / directions",
+  "Address book",
+  "Insurance cards (medical / travel)",
+  "Guidebook",
+  "House / car keys",
+].map((name) => CheckListItem(name: name, category: carryOnCategory)).toList();
+
+var myCheckList = CheckList(
+  name: "My check list",
+  items: [
+    CheckListItem(name: "Underwear", category: clothesCategory),
+    CheckListItem(name: "Socks / Stockings", category: clothesCategory),
+    CheckListItem(name: "Undershirts / bras", category: clothesCategory),
+    CheckListItem(name: "Sleepwear", category: clothesCategory),
+    CheckListItem(name: "Face cleanser", category: toiletriesCategory),
+    CheckListItem(name: "Hairstyling tools", category: toiletriesCategory),
+    CheckListItem(name: "Brush / comb", category: toiletriesCategory),
+    CheckListItem(name: "Shampoo / conditioner", category: toiletriesCategory),
+    CheckListItem(name: "Deodorant", category: toiletriesCategory),
+    CheckListItem(name: "Cell phone", category: miscCategory),
+    CheckListItem(name: "Electronic chargers", category: miscCategory),
+    CheckListItem(name: "Laptop / tablet", category: miscCategory),
+    CheckListItem(name: "Lip balm", category: carryOnCategory),
+    CheckListItem(name: "Ear plugs / eye mask", category: carryOnCategory),
+    CheckListItem(name: "Pashmina / travel blanket", category: carryOnCategory),
+    CheckListItem(name: "Video / music player", category: carryOnCategory),
+  ],
+);
