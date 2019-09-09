@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:packie/models.dart';
+import 'package:provider/provider.dart';
+
 import 'package:packie/components/_all.dart';
 import 'package:packie/constants.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:packie/store.dart';
 
-class ChecklistDetailsPage extends StatelessWidget {
+class ChecklistDetailsPage extends StatefulWidget {
   static const routeName = '/ChecklistDetailsPage';
 
+  @override
+  _ChecklistDetailsPageState createState() => _ChecklistDetailsPageState();
+}
+
+class _ChecklistDetailsPageState extends State<ChecklistDetailsPage> {
   final su = ScreenUtil.getInstance();
+
+  CheckListCategory selectedCategory;
 
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
+    final textTheme = Theme.of(context).textTheme;
+    final storeProvider = Provider.of<StoreProvider>(context);
+    final currentCheckList = storeProvider.currentCheckList;
+    final currentCheckListGrouped = currentCheckList.groupByCategory();
+
+    if (mounted) {
+      setState(() {
+        selectedCategory = currentCheckListGrouped.keys.first;
+      });
+    }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -46,8 +66,8 @@ class ChecklistDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Bahamas Packing List", style: textTheme.headline),
-            buildCategoriesView(),
+            Text(currentCheckList.name, style: textTheme.headline),
+            buildCategoriesView(currentCheckListGrouped.keys.toList()),
             Expanded(child: buildCheckListItems()),
             SizedBox(height: su.setHeight(60)),
             MyRaisedButton(
@@ -96,7 +116,7 @@ class ChecklistDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget buildCategoriesView() {
+  Widget buildCategoriesView(List<CheckListCategory> categories) {
     final su = ScreenUtil.getInstance();
 
     return GridView.count(
@@ -108,12 +128,13 @@ class ChecklistDetailsPage extends StatelessWidget {
       crossAxisSpacing: 15,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      children: <Widget>[
-        CategoryIcon(iconImage: 'assets/images/Group 12.png'),
-        CategoryIcon(iconImage: 'assets/images/clothes.png'),
-        CategoryIcon(iconImage: 'assets/images/camera.png'),
-        CategoryIcon(iconImage: 'assets/images/headphones.png'),
-      ],
+      children: categories
+          .map(
+            (category) => CategoryIcon(
+              iconImage: category.iconPath,
+            ),
+          )
+          .toList(),
     );
   }
 }

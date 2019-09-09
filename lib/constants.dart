@@ -10,5 +10,5 @@ class Constants {
       Color.fromRGBO(231, 231, 231, 1);
   static const backArrorColor = Color.fromRGBO(255, 187, 63, 1);
 
-  static const bodyPadding = 90.0;
+  static const bodyPadding = 80.0;
 }

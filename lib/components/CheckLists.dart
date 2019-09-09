@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:packie/constants.dart';
+
+import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import './_all.dart';
+import 'package:packie/store.dart';
+import 'package:packie/constants.dart';
+import 'package:packie/pages/_all.dart';
+import 'package:packie/components/_all.dart';
 
 class CheckLists extends StatelessWidget {
   CheckLists({
@@ -13,18 +17,28 @@ class CheckLists extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var storeProvider = Provider.of<StoreProvider>(context);
+
     return ListView.separated(
       padding: EdgeInsets.zero,
-      itemCount: 8,
+      itemCount: storeProvider.myCheckLists.length,
       separatorBuilder: (BuildContext context, int index) {
         return MyDivider();
       },
       itemBuilder: (BuildContext context, int index) {
         return Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: su.setHeight(Constants.bodyPadding),
+            horizontal: su.setWidth(Constants.bodyPadding),
           ),
-          child: CheckListItem(),
+          child: CheckListItemWidget(
+            checkList: storeProvider.myCheckLists[index],
+            onPressed: () {
+              storeProvider.setCurrentCheckList(
+                storeProvider.myCheckLists[index],
+              );
+              Navigator.of(context).pushNamed(ChecklistDetailsPage.routeName);
+            },
+          ),
         );
       },
     );

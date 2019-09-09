@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:packie/components/_all.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:packie/constants.dart';
+import 'package:packie/components/_all.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/';
@@ -32,7 +34,7 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(
                     top: su.setHeight(150),
-                    left: su.setWidth(Constants.bodyPadding / 2),
+                    left: su.setWidth(Constants.bodyPadding),
                   ),
                   child: Image.asset('assets/images/Avatar.png'),
                 ),
@@ -52,7 +54,7 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
               top: su.setHeight(40),
-              left: su.setHeight(Constants.bodyPadding),
+              left: su.setWidth(Constants.bodyPadding),
             ),
             child: RichText(
               text: TextSpan(

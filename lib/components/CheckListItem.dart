@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:packie/constants.dart';
-import 'package:packie/pages/ChecklistDetailsPage.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:packie/constants.dart';
+import 'package:packie/models.dart';
+
 import './_all.dart';
 
-class CheckListItem extends StatelessWidget {
+class CheckListItemWidget extends StatelessWidget {
+  CheckListItemWidget({this.checkList, this.onPressed});
+
   final su = ScreenUtil.getInstance();
+  final CheckList checkList;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
 
+    final groupedByCategories = checkList.groupByCategory();
+
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).pushNamed(ChecklistDetailsPage.routeName);
-      },
+      onTap: onPressed,
       child: Column(
         children: <Widget>[
           Row(
@@ -24,14 +29,18 @@ class CheckListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Bahamas Packing List", style: textTheme.title),
+              Text(checkList.name, style: textTheme.title),
               Row(
-                children: <Widget>[
-                  CategoryIcon(iconImage: 'assets/images/clothes.png'),
-                  SizedBox(width: 5),
-                  CategoryIcon(iconImage: 'assets/images/clothes.png'),
-                ],
-              )
+                  children: groupedByCategories.keys
+                      .map(
+                        (category) => Padding(
+                          padding: EdgeInsets.only(left: 5),
+                          child: CategoryIcon(
+                            iconImage: category.iconPath,
+                          ),
+                        ),
+                      )
+                      .toList())
             ],
           ),
           SizedBox(height: su.setHeight(40)),
