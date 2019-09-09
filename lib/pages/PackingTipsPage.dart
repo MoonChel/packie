@@ -123,25 +123,28 @@ class PackingTipsPage extends StatelessWidget {
     return SliverAppBar(
       backgroundColor: Constants.blue,
       automaticallyImplyLeading: false,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          MyBackButton(topPadding: 0.0, color: Colors.white),
-          Padding(
-            padding: EdgeInsets.only(
-              top: su.setHeight(10),
-              right: su.setHeight(10),
-            ),
-            child: FlatButton(
-              child: Image.asset('assets/images/settings_white.png'),
-              onPressed: () {
-                Navigator.pushNamed(context, SettingsPage.routeName);
-              },
-            ),
-          ),
-        ],
-      ),
+      centerTitle: false,
       titleSpacing: 0,
+      title: MyBackButton(topPadding: 0.0, color: Colors.white),
+      // prepared for setting page
+      // Row(
+      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //   children: <Widget>[
+      // MyBackButton(topPadding: 0.0, color: Colors.white),
+      // Padding(
+      //   padding: EdgeInsets.only(
+      //     top: su.setHeight(10),
+      //     right: su.setHeight(10),
+      //   ),
+      //   child: FlatButton(
+      //     child: Image.asset('assets/images/settings_white.png'),
+      //     onPressed: () {
+      //       Navigator.pushNamed(context, SettingsPage.routeName);
+      //     },
+      //   ),
+      // ),
+      //   ],
+      // ),
       flexibleSpace: FlexibleSpaceBar(
         background: Image.asset(
           'assets/images/clothes-luggage.jpg',

@@ -16,26 +16,39 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(su.setHeight(240)),
+        child: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          leading: null,
+          flexibleSpace: FlexibleSpaceBar(
+            titlePadding: EdgeInsets.zero,
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: su.setHeight(150),
+                    left: su.setWidth(Constants.bodyPadding / 2),
+                  ),
+                  child: Image.asset('assets/images/Avatar.png'),
+                ),
+                CornerButton(
+                  onPressed: () {
+                    showCreateCheckListModal(context);
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                  top: su.setHeight(150),
-                  left: su.setWidth(Constants.bodyPadding),
-                ),
-                child: Image.asset('assets/images/Avatar.png'),
-              ),
-              CornerButton(
-                onPressed: () {
-                  showCreateCheckListModal(context);
-                },
-              ),
-            ],
-          ),
           Padding(
             padding: EdgeInsets.only(
               top: su.setHeight(40),

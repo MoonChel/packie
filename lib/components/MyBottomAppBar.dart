@@ -34,10 +34,10 @@ class MyBottomAppBar extends StatelessWidget {
           icon: Icon(Icons.lightbulb_outline),
           title: Text("packing tips"),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          title: Text("settings"),
-        ),
+        // BottomNavigationBarItem(
+        //   icon: Icon(Icons.settings),
+        //   title: Text("settings"),
+        // ),
       ],
     );
   }
