@@ -51,18 +51,38 @@ class PackingTipsPage extends StatelessWidget {
   ) {
     final textTheme = Theme.of(context).textTheme;
 
+    final contentPadding = su.setHeight(80);
+
     return GestureDetector(
       onTap: () {
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
+              titlePadding: EdgeInsets.zero,
+              contentPadding: EdgeInsets.all(contentPadding),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(30),
+                  Radius.circular(su.setWidth(100)),
                 ),
               ),
-              title: Text(packingTip.title),
+              title: Row(
+                textBaseline: TextBaseline.alphabetic,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: contentPadding),
+                    child: Text(packingTip.title),
+                  ),
+                  ClipRRect(
+                    child: CloseBottomSheetButton(),
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(su.setWidth(100)),
+                    ),
+                  ),
+                ],
+              ),
               content: Text(packingTip.description),
             );
           },
@@ -106,13 +126,10 @@ class PackingTipsPage extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          MyBackButton(
-            topPadding: 0.0,
-            color: Colors.white,
-          ),
+          MyBackButton(topPadding: 0.0, color: Colors.white),
           Padding(
             padding: EdgeInsets.only(
-              top: su.setHeight(20),
+              top: su.setHeight(10),
               right: su.setHeight(10),
             ),
             child: FlatButton(
