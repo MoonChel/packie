@@ -36,27 +36,7 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(su.setHeight(240)),
-        child: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          automaticallyImplyLeading: false,
-          leading: null,
-          flexibleSpace: FlexibleSpaceBar(
-            titlePadding: EdgeInsets.zero,
-            title: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                MyBackButton(),
-                CornerButton(
-                  onPressed: () {
-                    showCreateNewListModal(context);
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
+        child: buildAppBar(context),
       ),
       body: Padding(
         padding: EdgeInsets.only(
@@ -76,6 +56,26 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage> {
               onPressed: () {},
             ),
             SizedBox(height: su.setHeight(80)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      flexibleSpace: FlexibleSpaceBar(
+        titlePadding: EdgeInsets.zero,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            MyBackButton(),
+            CornerButton(
+              onPressed: () {
+                showCreateNewListModal(context);
+              },
+            ),
           ],
         ),
       ),

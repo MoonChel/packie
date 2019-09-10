@@ -33,9 +33,8 @@ class CheckLists extends StatelessWidget {
           child: CheckListItemWidget(
             checkList: storeProvider.myCheckLists[index],
             onPressed: () {
-              storeProvider.setCurrentCheckList(
-                storeProvider.myCheckLists[index],
-              );
+              storeProvider.currentCheckList =
+                  storeProvider.myCheckLists[index];
               Navigator.of(context).pushNamed(ChecklistDetailsPage.routeName);
             },
           ),

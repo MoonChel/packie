@@ -20,25 +20,29 @@ class PackingTipsPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           buildSliverAppBar(context),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              tips
-                  .asMap()
-                  .map(
-                    (index, packingTip) => MapEntry(
-                      index,
-                      buildPackingTipListItem(
-                        index,
-                        packingTip,
-                        context,
-                      ),
-                    ),
-                  )
-                  .values
-                  .toList(),
-            ),
-          ),
+          buildSliverList(context),
         ],
+      ),
+    );
+  }
+
+  SliverList buildSliverList(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildListDelegate(
+        tips
+            .asMap()
+            .map(
+              (index, packingTip) => MapEntry(
+                index,
+                buildPackingTipListItem(
+                  index,
+                  packingTip,
+                  context,
+                ),
+              ),
+            )
+            .values
+            .toList(),
       ),
     );
   }

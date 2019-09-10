@@ -36,6 +36,10 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            color: Colors.transparent,
+            elevation: 0.0,
+          ),
           scaffoldBackgroundColor: Colors.white,
           primarySwatch: Colors.blue,
           bottomSheetTheme: BottomSheetThemeData(
@@ -70,6 +74,11 @@ class MyApp extends StatelessWidget {
             fillColor: Constants.backgroundColor,
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(width: 0, color: Colors.white),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            errorStyle: TextStyle(color: Constants.orange, fontSize: 15),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 1, color: Constants.orange),
               borderRadius: BorderRadius.circular(10),
             ),
             contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
