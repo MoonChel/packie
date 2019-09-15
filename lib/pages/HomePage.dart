@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           buildHeader(su, textTheme),
           SizedBox(height: su.setHeight(150)),
-          Expanded(child: CheckLists()),
+          Expanded(child: CheckListsWidget()),
           SizedBox(height: su.setHeight(100)),
         ],
       ),
@@ -48,9 +48,10 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(
                 top: su.setHeight(150),
+                bottom: su.setHeight(50),
                 left: su.setWidth(Constants.bodyPadding),
               ),
-              child: Image.asset('assets/images/Avatar.png'),
+              child: Image.asset('assets/images/suitcase.png'),
             ),
             CornerButton(
               onPressed: () {
@@ -123,9 +124,9 @@ class HomePage extends StatelessWidget {
         MyRaisedButton(
           color: Constants.blue,
           text: "Create List",
-          onPressed: () {
+          onPressed: () async {
             Navigator.of(context).pop();
-            storeProvider.createCheckList(textController.text);
+            await storeProvider.createCheckList(textController.text);
             Navigator.of(context).pushNamed(ChecklistDetailsPage.routeName);
           },
         ),

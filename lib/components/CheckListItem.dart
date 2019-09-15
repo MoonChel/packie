@@ -20,6 +20,7 @@ class CheckListItemWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: onPressed,
+      behavior: HitTestBehavior.translucent,
       child: Column(
         children: <Widget>[
           Row(
@@ -46,7 +47,9 @@ class CheckListItemWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: LinearProgressIndicator(
-              value: 0.5,
+              value: 1 -
+                  (checkList.getRemainsCount() /
+                      checkList.getAllItems().length),
               // valueColor: Constants.orange,
               backgroundColor: Constants.progressIndicatorBackgroundColor,
             ),

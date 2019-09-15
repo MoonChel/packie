@@ -28,6 +28,8 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
     final store = Provider.of<StoreProvider>(context);
     final checkList = store.currentCheckList;
 
+    final textController = TextEditingController(text: checkList.name);
+
     return ChangeNotifierProvider<TabProvider>(
       builder: (_) => TabProvider(),
       child: Scaffold(
@@ -43,7 +45,26 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(checkList.name, style: textTheme.headline),
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  showUpdateCheckListModal(
+                    context,
+                    textTheme,
+                    textController,
+                    store,
+                  );
+                },
+                onDoubleTap: () {
+                  showUpdateCheckListModal(
+                    context,
+                    textTheme,
+                    textController,
+                    store,
+                  );
+                },
+                child: Text(checkList.name, style: textTheme.headline),
+              ),
               Text(
                 "Remains: ${checkList.getRemainsCount()}",
                 style: textTheme.subhead,
@@ -55,8 +76,8 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
               MyRaisedButton(
                 color: Constants.orange,
                 text: "Clear",
-                onPressed: () {
-                  store.refreshCheckList();
+                onPressed: () async {
+                  await store.refreshCheckList();
                 },
               ),
               SizedBox(height: su.setHeight(80)),
@@ -64,6 +85,39 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
           ),
         ),
       ),
+    );
+  }
+
+  Future showUpdateCheckListModal(BuildContext context, TextTheme textTheme,
+      TextEditingController textController, StoreProvider store) {
+    return showMyBottomSheetModal(
+      context: context,
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text("Update Checklist", style: textTheme.headline),
+        ),
+        SizedBox(height: su.setHeight(50)),
+        Flexible(
+          child: TextField(
+            controller: textController,
+            maxLines: 1,
+            maxLength: 50,
+            autofocus: true,
+            decoration: InputDecoration(
+              hintText: "List Name",
+            ),
+          ),
+        ),
+        SizedBox(height: su.setHeight(30)),
+        MyRaisedButton(
+          text: "Update",
+          onPressed: () {
+            store.updateCheckListName(textController.text);
+            Navigator.of(context).pop();
+          },
+        )
+      ],
     );
   }
 
@@ -100,7 +154,7 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
               builder: (context, tabProvider, child) {
                 return CornerButton(
                   onPressed: () {
-                    showCreateNewListModal(context, tabProvider);
+                    showCreateItemModal(context, tabProvider);
                   },
                 );
               },
@@ -119,6 +173,8 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
 
     final item =
         store.currentCheckList.categories[tabProvider.index].items[itemIndex];
+    final textController = TextEditingController(text: item.name);
+    final textTheme = Theme.of(context).textTheme;
 
     return Dismissible(
       key: Key(item.name),
@@ -128,35 +184,62 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
           itemIndex,
         );
       },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: 3,
-            horizontal: 15,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Checkbox(
-                value: item.selected,
-                onChanged: (bool value) {
-                  store.selectItem(
-                    index: itemIndex,
-                    category:
-                        store.currentCheckList.categories[tabProvider.index],
-                    selected: value,
-                  );
-                },
+      child: GestureDetector(
+        onDoubleTap: () {
+          showMyBottomSheetModal(children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Update Item", style: textTheme.headline),
+            ),
+            SizedBox(height: su.setHeight(50)),
+            Flexible(
+              child: TextField(
+                controller: textController,
+                maxLines: 1,
+                maxLength: 50,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: "Item's Name",
+                ),
               ),
-              SizedBox(width: 10),
-              Expanded(child: Text(item.name)),
-              Icon(Icons.more_vert, color: Constants.blue),
-            ],
-          ),
-          decoration: BoxDecoration(
-            color: Constants.backgroundColor,
-            borderRadius: BorderRadius.circular(40),
+            ),
+            SizedBox(height: su.setHeight(30)),
+            MyRaisedButton(
+              text: "Update",
+              onPressed: () {
+                store.updateItemName(item, textController.text);
+                Navigator.of(context).pop();
+              },
+            )
+          ], context: context);
+        },
+        onTap: () async {
+          await store.selectItem(item, !item.selected);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 3,
+              horizontal: 15,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Checkbox(
+                  value: item.selected,
+                  onChanged: (bool value) async {
+                    await store.selectItem(item, value);
+                  },
+                ),
+                SizedBox(width: 10),
+                Expanded(child: Text(item.name)),
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Constants.backgroundColor,
+              borderRadius: BorderRadius.circular(40),
+            ),
           ),
         ),
       ),
@@ -206,7 +289,7 @@ class CategoriesView extends StatelessWidget {
   }
 }
 
-Future showCreateNewListModal(BuildContext context, TabProvider tabProvider) {
+Future showCreateItemModal(BuildContext context, TabProvider tabProvider) {
   final textTheme = Theme.of(context).textTheme;
   final su = ScreenUtil.getInstance();
   final textController = TextEditingController();

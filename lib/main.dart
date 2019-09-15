@@ -8,10 +8,15 @@ import 'package:packie/pages/_all.dart';
 import 'package:packie/pages/_routes.dart';
 import 'package:packie/store.dart';
 import 'package:packie/models.dart';
+import 'package:packie/locator.dart';
 
 import 'package:packie/dummy_data.dart';
 
-void main() => runApp(MyApp());
+Future main() async {
+  await setupLocator();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -23,18 +28,7 @@ class MyApp extends StatelessWidget {
     );
 
     return ChangeNotifierProvider(
-      builder: (context) => StoreProvider(
-        myCheckLists: [myCheckList],
-        defaultCheckList: CheckList(
-          name: "Default checklist",
-          categories: [
-            clothesCategory,
-            toiletriesCategory,
-            miscCategory,
-            carryOnCategory,
-          ],
-        ),
-      ),
+      builder: (context) => StoreProvider(),
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,

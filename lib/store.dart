@@ -1,65 +1,81 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-
-import './models.dart';
+import 'package:get_it/get_it.dart';
+import 'package:packie/models.dart';
+import 'package:packie/services/database.dart';
+import 'package:packie/dummy_data.dart';
 
 class StoreProvider with ChangeNotifier {
-  StoreProvider({
-    @required this.myCheckLists,
-    @required this.defaultCheckList,
-  });
+  DB db = GetIt.I.get<DB>();
 
-  List<CheckList> myCheckLists;
-  CheckList defaultCheckList;
+  List<CheckList> myCheckLists = [];
+
+  final CheckList defaultCheckList = CheckList(
+    name: "Default checklist",
+    categories: [
+      clothesCategory,
+      toiletriesCategory,
+      miscCategory,
+      carryOnCategory,
+    ],
+  );
+
   CheckList _currentCheckList;
-
   CheckList get currentCheckList => _currentCheckList;
-
   set currentCheckList(CheckList currentCheckList) {
     _currentCheckList = currentCheckList;
-
     notifyListeners();
   }
 
-  void createCheckList(String name) {
-    final newCheckList = CheckList(
+  Future loadMyCheckLists() async {
+    myCheckLists = await db.loadCheckLists();
+  }
+
+  Future removeCheckList(CheckList checkList) async {
+    await db.removeCheckList(checkList);
+    myCheckLists.remove(checkList);
+    notifyListeners();
+  }
+
+  Future updateItemName(CheckListItem item, String name) async {
+    item.name = name;
+    await db.updateCheckListItemName(name, item.id);
+    notifyListeners();
+  }
+
+  Future updateCheckListName(String name) async {
+    await db.updateCheckListName(name, currentCheckList.id);
+    currentCheckList.name = name;
+    notifyListeners();
+  }
+
+  Future createCheckList(String name) async {
+    final checkList = CheckList(
       name: name,
       categories: defaultCheckList.categories,
     );
 
-    myCheckLists.add(newCheckList);
+    await db.createCheckList(checkList);
 
-    currentCheckList = newCheckList;
+    currentCheckList = checkList;
 
-    notifyListeners();
-  }
-
-  void updateCheckListName(String name) {
-    var index = myCheckLists.indexOf(currentCheckList);
-    currentCheckList = CheckList(
-      name: name,
-      categories: currentCheckList.categories,
-    );
-    myCheckLists[index] = currentCheckList;
+    myCheckLists.add(currentCheckList);
 
     notifyListeners();
   }
 
-  void selectItem({
-    int index,
-    bool selected,
-    CheckListCategory category,
-  }) {
-    category.items[index] = CheckListItem(
-      name: category.items[index].name,
-      selected: selected,
-    );
+  Future selectItem(CheckListItem item, bool selected) async {
+    var category =
+        currentCheckList.categories.firstWhere((c) => c.id == item.categoryId);
+    var index = category.items.indexWhere((cItem) => cItem.id == item.id);
+
+    category.items[index].selected = selected;
+
+    await db.selectItem(item, selected);
 
     notifyListeners();
   }
 
-  void refreshCheckList() {
+  Future refreshCheckList() async {
     currentCheckList.categories.forEach((category) {
       var index = currentCheckList.categories.indexOf(category);
       currentCheckList.categories[index] = CheckListCategory(
@@ -71,17 +87,21 @@ class StoreProvider with ChangeNotifier {
       );
     });
 
+    await db.refreshCheckList(currentCheckList);
+
     notifyListeners();
   }
 
-  void removeItem(CheckListCategory category, int index) {
+  Future removeItem(CheckListCategory category, int index) async {
+    await db.removeItem(category.items[index]);
     category.items.removeAt(index);
     notifyListeners();
   }
 
-  void addItem(CheckListCategory category, CheckListItem item) {
+  Future addItem(CheckListCategory category, CheckListItem item) async {
+    item.categoryId = category.id;
+    item.id = await db.addItem(item);
     category.items.insert(0, item);
-
     notifyListeners();
   }
 }
