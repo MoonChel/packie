@@ -17,11 +17,11 @@ class CheckLists extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var storeProvider = Provider.of<StoreProvider>(context);
+    final store = Provider.of<StoreProvider>(context);
 
     return ListView.separated(
       padding: EdgeInsets.zero,
-      itemCount: storeProvider.myCheckLists.length,
+      itemCount: store.myCheckLists.length,
       separatorBuilder: (BuildContext context, int index) {
         return MyDivider();
       },
@@ -31,10 +31,9 @@ class CheckLists extends StatelessWidget {
             horizontal: su.setWidth(Constants.bodyPadding),
           ),
           child: CheckListItemWidget(
-            checkList: storeProvider.myCheckLists[index],
+            checkList: store.myCheckLists[index],
             onPressed: () {
-              storeProvider.currentCheckList =
-                  storeProvider.myCheckLists[index];
+              store.currentCheckList = store.myCheckLists[index];
               Navigator.of(context).pushNamed(ChecklistDetailsPage.routeName);
             },
           ),

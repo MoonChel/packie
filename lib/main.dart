@@ -24,12 +24,15 @@ class MyApp extends StatelessWidget {
 
     return ChangeNotifierProvider(
       builder: (context) => StoreProvider(
-        myCheckLists: [
-          myCheckList,
-        ],
+        myCheckLists: [myCheckList],
         defaultCheckList: CheckList(
           name: "Default checklist",
-          items: clothes + toiletries + misc + carryOn,
+          categories: [
+            clothesCategory,
+            toiletriesCategory,
+            miscCategory,
+            carryOnCategory,
+          ],
         ),
       ),
       child: MaterialApp(
@@ -88,8 +91,8 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case HomePage.routeName:
-            case ChecklistDetailsPage.routeName:
             case SettingsPage.routeName:
+            case ChecklistDetailsPage.routeName:
               FlutterStatusbarcolor.setStatusBarColor(
                 Constants.blue,
                 animate: true,

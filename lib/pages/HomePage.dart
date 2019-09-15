@@ -97,8 +97,6 @@ class HomePage extends StatelessWidget {
     final textController = TextEditingController();
     final storeProvider = Provider.of<StoreProvider>(context);
 
-    var selectedCategories = [];
-
     return showMyBottomSheetModal(
       context: context,
       children: <Widget>[
@@ -122,35 +120,12 @@ class HomePage extends StatelessWidget {
           ),
         ),
         SizedBox(height: su.setHeight(50)),
-        GridView.count(
-            physics: NeverScrollableScrollPhysics(),
-            crossAxisCount: 4,
-            crossAxisSpacing: 10,
-            shrinkWrap: true,
-            children: storeProvider.defaultCheckList
-                .groupByCategory()
-                .keys
-                .map((category) => CategoryIcon(
-                      iconImage: category.iconPath,
-                      onPressed: () {
-                        if (selectedCategories.contains(category)) {
-                          selectedCategories.remove(category);
-                        } else {
-                          selectedCategories.add(category);
-                        }
-                      },
-                    ))
-                .toList()),
-        SizedBox(height: su.setHeight(40)),
         MyRaisedButton(
           color: Constants.blue,
           text: "Create List",
           onPressed: () {
             Navigator.of(context).pop();
-            storeProvider.createCheckList(
-              textController.text,
-              selectedCategories,
-            );
+            storeProvider.createCheckList(textController.text);
             Navigator.of(context).pushNamed(ChecklistDetailsPage.routeName);
           },
         ),

@@ -18,8 +18,6 @@ class CheckListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
 
-    final groupedByCategories = checkList.groupByCategory();
-
     return GestureDetector(
       onTap: onPressed,
       child: Column(
@@ -31,16 +29,17 @@ class CheckListItemWidget extends StatelessWidget {
             children: <Widget>[
               Text(checkList.name, style: textTheme.title),
               Row(
-                  children: groupedByCategories.keys
-                      .map(
-                        (category) => Padding(
-                          padding: EdgeInsets.only(left: 5),
-                          child: CategoryIcon(
-                            iconImage: category.iconPath,
-                          ),
+                children: checkList.categories
+                    .map(
+                      (category) => Padding(
+                        padding: EdgeInsets.only(left: 5),
+                        child: CategoryIcon(
+                          iconImage: category.iconPath,
                         ),
-                      )
-                      .toList())
+                      ),
+                    )
+                    .toList(),
+              )
             ],
           ),
           SizedBox(height: su.setHeight(40)),

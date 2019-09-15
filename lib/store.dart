@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import './models.dart';
@@ -20,12 +22,10 @@ class StoreProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void createCheckList(String name, List<CheckListCategory> categories) {
+  void createCheckList(String name) {
     final newCheckList = CheckList(
       name: name,
-      items: defaultCheckList.items.where(
-        (item) => categories.contains(item.category),
-      ),
+      categories: defaultCheckList.categories,
     );
 
     myCheckLists.add(newCheckList);
@@ -37,19 +37,50 @@ class StoreProvider with ChangeNotifier {
 
   void updateCheckListName(String name) {
     var index = myCheckLists.indexOf(currentCheckList);
-    currentCheckList = CheckList(name: name, items: currentCheckList.items);
+    currentCheckList = CheckList(
+      name: name,
+      categories: currentCheckList.categories,
+    );
     myCheckLists[index] = currentCheckList;
 
     notifyListeners();
   }
 
-  void selectItem(CheckListItem item, bool selected) {
-    var index = currentCheckList.items.indexOf(item);
-    currentCheckList.items[index] = CheckListItem(
-      name: item.name,
-      category: item.category,
+  void selectItem({
+    int index,
+    bool selected,
+    CheckListCategory category,
+  }) {
+    category.items[index] = CheckListItem(
+      name: category.items[index].name,
       selected: selected,
     );
+
+    notifyListeners();
+  }
+
+  void refreshCheckList() {
+    currentCheckList.categories.forEach((category) {
+      var index = currentCheckList.categories.indexOf(category);
+      currentCheckList.categories[index] = CheckListCategory(
+        name: category.name,
+        iconPath: category.iconPath,
+        items: category.items
+            .map((item) => CheckListItem(name: item.name))
+            .toList(),
+      );
+    });
+
+    notifyListeners();
+  }
+
+  void removeItem(CheckListCategory category, int index) {
+    category.items.removeAt(index);
+    notifyListeners();
+  }
+
+  void addItem(CheckListCategory category, CheckListItem item) {
+    category.items.insert(0, item);
 
     notifyListeners();
   }
