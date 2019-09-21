@@ -125,6 +125,9 @@ class HomePage extends StatelessWidget {
           color: Constants.blue,
           text: "Create List",
           onPressed: () async {
+            if (textController.text.isEmpty) {
+              return;
+            }
             Navigator.of(context).pop();
             await storeProvider.createCheckList(textController.text);
             Navigator.of(context).pushNamed(ChecklistDetailsPage.routeName);

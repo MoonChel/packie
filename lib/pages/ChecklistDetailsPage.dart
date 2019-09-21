@@ -75,7 +75,7 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
               SizedBox(height: su.setHeight(60)),
               MyRaisedButton(
                 color: Constants.orange,
-                text: "Clear",
+                text: "Refresh",
                 onPressed: () async {
                   await store.refreshCheckList();
                 },
@@ -113,6 +113,9 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
         MyRaisedButton(
           text: "Update",
           onPressed: () {
+            if (textController.text.isEmpty) {
+              return;
+            }
             store.updateCheckListName(textController.text);
             Navigator.of(context).pop();
           },
@@ -207,6 +210,9 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
             MyRaisedButton(
               text: "Update",
               onPressed: () {
+                if (textController.text.isEmpty) {
+                  return;
+                }
                 store.updateItemName(item, textController.text);
                 Navigator.of(context).pop();
               },
@@ -318,6 +324,9 @@ Future showCreateItemModal(BuildContext context, TabProvider tabProvider) {
       MyRaisedButton(
         text: "Add Item",
         onPressed: () {
+          if (textController.text.isEmpty) {
+            return;
+          }
           store.addItem(
             store.currentCheckList.categories[tabProvider.index],
             CheckListItem(name: textController.text),
