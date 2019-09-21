@@ -34,7 +34,7 @@ class _ChecklistDetailsPageState extends State<ChecklistDetailsPage>
       builder: (_) => TabProvider(),
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(su.setHeight(240)),
+          preferredSize: Size.fromHeight(su.setHeight(280)),
           child: buildAppBar(),
         ),
         body: Padding(

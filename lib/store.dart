@@ -76,18 +76,13 @@ class StoreProvider with ChangeNotifier {
   }
 
   Future refreshCheckList() async {
-    currentCheckList.categories.forEach((category) {
-      var index = currentCheckList.categories.indexOf(category);
-      currentCheckList.categories[index] = CheckListCategory(
-        name: category.name,
-        iconPath: category.iconPath,
-        items: category.items
-            .map((item) => CheckListItem(name: item.name))
-            .toList(),
-      );
+    var items = currentCheckList.getAllItems();
+
+    items.forEach((item) {
+      item.selected = false;
     });
 
-    await db.refreshCheckList(currentCheckList);
+    await db.refreshCheckList(items);
 
     notifyListeners();
   }

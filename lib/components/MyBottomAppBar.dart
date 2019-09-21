@@ -1,3 +1,4 @@
+import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 
 import 'package:packie/constants.dart';
@@ -17,27 +18,25 @@ class MyBottomAppBar extends StatelessWidget {
       elevation: 200,
       iconSize: 35,
       unselectedItemColor: Constants.fontColor,
-      selectedItemColor: Constants.orange,
+      selectedItemColor: Constants.fontColor,
+      currentIndex: 0,
       onTap: (int index) {
-        if (index == 1) {
+        if (index == 0) {
           Navigator.pushNamed(context, PackingTipsPage.routeName);
-        } else if (index == 2) {
-          Navigator.pushNamed(context, SettingsPage.routeName);
+        } else if (index == 1) {
+          // in this case it's only for android
+          AppReview.writeReview.then((onValue) {});
         }
       },
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          title: Text("home"),
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.lightbulb_outline),
           title: Text("packing tips"),
         ),
-        // BottomNavigationBarItem(
-        //   icon: Icon(Icons.settings),
-        //   title: Text("settings"),
-        // ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.star_border),
+          title: Text("rate"),
+        ),
       ],
     );
   }

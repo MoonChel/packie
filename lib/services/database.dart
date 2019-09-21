@@ -162,11 +162,8 @@ class DB {
     );
   }
 
-  Future refreshCheckList(CheckList checkList) async {
-    checkList.categories
-        .map((c) => c.items)
-        .reduce((left, right) => left + right)
-        .forEach((item) async {
+  Future refreshCheckList(List<CheckListItem> items) async {
+    items.forEach((item) async {
       await selectItem(item, false);
     });
   }

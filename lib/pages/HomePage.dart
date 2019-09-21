@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(su.setHeight(240)),
+        preferredSize: Size.fromHeight(su.setHeight(280)),
         child: buildAppBar(su, context),
       ),
       body: Column(
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(
-                top: su.setHeight(150),
+                top: su.setHeight(200),
                 bottom: su.setHeight(50),
                 left: su.setWidth(Constants.bodyPadding),
               ),
