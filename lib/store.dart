@@ -51,7 +51,19 @@ class StoreProvider with ChangeNotifier {
   Future createCheckList(String name) async {
     final checkList = CheckList(
       name: name,
-      categories: defaultCheckList.categories,
+      categories: defaultCheckList.categories
+          .map(
+            (c) => CheckListCategory(
+              iconPath: c.iconPath,
+              name: c.name,
+              items: c.items
+                  .map(
+                    (item) => CheckListItem(name: item.name),
+                  )
+                  .toList(),
+            ),
+          )
+          .toList(),
     );
 
     await db.createCheckList(checkList);
